@@ -6,7 +6,7 @@ export default new DocsSource({
   id: 'corncierge',
   name: 'Corncierge',
   global: 'Corncierge',
-  repo: 'discordjs/discord.js',
+  repo: 'ckohen/platiBot',
   defaultTag: 'master',
   branchFilter: branch => !branchBlacklist.has(branch) && !branch.startsWith('dependabot/'),
   tagFilter: tag => semver.gte(tag, '9.0.0'),
