@@ -92,6 +92,33 @@ export default {
           docs.links.Message = { name: 'docs-class', params: { source: 'main', tag: 'master', class: 'Message' } };
         }
 
+        // Workaround for corncierge inter-source see also linking
+        if (this.source.id === 'corncierge') {
+          docs.links.Axios = 'https://github.com/axios/axios#axios-api';
+          docs.links.axiosRequest = 'https://github.com/axios/axios#request-config';
+          docs.links.axiosResponse = 'https://github.com/axios/axios#response-schema';
+          docs.links.httpServer = 'https://nodejs.org/api/http.html#http_class_http_server';
+          docs.links.mysql2Connection = 'https://github.com/sidorares/node-mysql2/blob/master/documentation/Prepared-Statements.md';
+          docs.links.mysql2Pool = 'https://github.com/sidorares/node-mysql2/blob/master/documentation';
+          docs.links.RateLimiter = 'https://github.com/jhurliman/node-rate-limiter';
+          docs.links.Throttle = 'https://github.com/brycebaril/node-tokenthrottle';
+          docs.links.tmijsClient = 'https://github.com/tmijs/tmi.js';
+          docs.links.Winston = 'https://github.com/winstonjs/winston#creating-your-own-logger';
+          docs.links.APIMessage = { name: 'docs-class', params: { source: 'main', tag: 'master', class: 'APIMessage' } };
+          docs.links.Channel = { name: 'docs-class', params: { source: 'main', tag: 'master', class: 'Channel' } };
+          docs.links.Collection = { name: 'docs-class', params: { source: 'collection', tag: 'master', class: 'Collection' } };
+          docs.links.discordjsClient = { name: 'docs-class', params: { source: 'main', tag: 'master', class: 'Client' } };
+          docs.links.Guild = { name: 'docs-class', params: { source: 'main', tag: 'master', class: 'Guild' } };
+          docs.links.GuildMember = { name: 'docs-class', params: { source: 'main', tag: 'master', class: 'GuildMember' } };
+          docs.links.Message = { name: 'docs-class', params: { source: 'main', tag: 'master', class: 'Message' } };
+          docs.links.MessageAdditions = { name: 'docs-class', params: { source: 'main', tag: 'master', class: 'MessageAdditions' } };
+          docs.links.Role = { name: 'docs-class', params: { source: 'main', tag: 'master', class: 'Role' } };
+          docs.links.Webhook = { name: 'docs-class', params: { source: 'main', tag: 'master', class: 'Webhook' } };
+          docs.links.MessageOptions = { name: 'docs-typedef', params: { source: 'main', tag: 'master', typedef: 'MessageOptions' } };
+          docs.links.Snowflake = { name: 'docs-typedef', params: { source: 'main', tag: 'master', typedef: 'Snowflake' } };
+          docs.links.StringResolvable = { name: 'docs-typedef', params: { source: 'main', tag: 'master', typedef: 'StringResolvable' } };
+        }
+
         docs.global = this.source.global;
         docs.source = this.source.source;
         docs.tag = this.tag;
