@@ -22,12 +22,34 @@
           </ul>
         </li>
 
+        <li v-if="visibleCommands.length > 0">
+          Built-in Commands
+          <transition-group name="animated-list" tag="ul">
+            <li v-for="command in visibleCommands" :key="command.name" class="animated-list-item">
+              <router-link exact :to="{ name: 'docs-command', params: { command: command.name } }">
+                {{ command.name }}
+              </router-link>
+            </li>
+          </transition-group>
+        </li>
+
         <li v-if="visibleClasses.length > 0">
           Classes
           <transition-group name="animated-list" tag="ul">
             <li v-for="clarse in visibleClasses" :key="clarse.name" class="animated-list-item">
               <router-link exact :to="{ name: 'docs-class', params: { class: clarse.name } }">
                 {{ clarse.name }}
+              </router-link>
+            </li>
+          </transition-group>
+        </li>
+
+        <li v-if="visibleTables.length > 0">
+          Database Tables
+          <transition-group name="animated-list" tag="ul">
+            <li v-for="table in visibleTables" :key="table.name" class="animated-list-item">
+              <router-link exact :to="{ name: 'docs-class', params: { class: table.name } }">
+                {{ table.name }}
               </router-link>
             </li>
           </transition-group>
@@ -61,8 +83,16 @@ export default {
   },
 
   computed: {
+    visibleCommands() {
+      return this.showPrivate ? this.docs.commands : this.docs.commands.filter(c => c.access !== 'private');
+    },
+
     visibleClasses() {
       return this.showPrivate ? this.docs.classes : this.docs.classes.filter(c => c.access !== 'private');
+    },
+
+    visibleTables() {
+      return this.showPrivate ? this.docs.tables : this.docs.tables.filter(t => t.access !== 'private');
     },
 
     visibleTypedefs() {

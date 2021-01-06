@@ -53,6 +53,31 @@ export default {
           if (c.events) c.events.sort((a, b) => a.name.localeCompare(b.name));
         }
 
+        // Separate classes from tables and commands
+        docs.commands = [];
+        docs.tables = [];
+        if (this.source.id === 'corncierge') {
+          docs.classes = docs.classes
+            .filter(c => {
+              if (/Table$/.test(c.name)) {
+                c.name = c.name.replace(/Table$/, '');
+                docs.tables.push(c);
+                return true;
+              } else if (/Command$/.test(c.name)) {
+                c.name = c.name.replace(/Command$/, '');
+                docs.commands.push(c);
+                return false;
+              } else return true;
+            })
+            .map(c => {
+              if (/Table$/.test(c.name)) {
+                c.name = c.name.replace(/Table$/, '');
+                return c;
+              }
+              return c;
+            });
+        }
+
         // Built-in type links
         docs.links = {
           string: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String',
@@ -84,6 +109,7 @@ export default {
         docs.classes = docs.classes || [];
         docs.typedefs = docs.typedefs || [];
         for (const x of docs.externals) docs.links[x.name] = x.see[0].replace(/\{@link\s+(.+?)\s*\}/i, '$1');
+        for (const c of docs.commands) docs.links[c.name] = { name: 'docs-command', params: { command: c.name }};
         for (const c of docs.classes) docs.links[c.name] = { name: 'docs-class', params: { class: c.name } };
         for (const t of docs.typedefs) docs.links[t.name] = { name: 'docs-typedef', params: { typedef: t.name } };
 
@@ -131,7 +157,9 @@ export default {
         if (SHITS.switching) {
           const route = this.$route;
           SHITS.switching = false;
-          if (route.name === 'docs-class') {
+          if (route.name === 'docs-command') {
+            if (!docs.commands.some(c => c.name === route.params.command)) this.goHome();
+          } else if (route.name === 'docs-class') {
             if (!docs.classes.some(c => c.name === route.params.class)) this.goHome();
           } else if (route.name === 'docs-typedef') {
             if (!docs.typedefs.some(t => t.name === route.params.typedef)) this.goHome();
@@ -165,6 +193,7 @@ export default {
 
         const delayScroll = fromRoute && (
           this.$route.name !== fromRoute.name ||
+            this.$route.params.command !== fromRoute.params.command ||
             this.$route.params.class !== fromRoute.params.class ||
             this.$route.params.typedef !== fromRoute.params.typedef ||
             this.$route.params.file !== fromRoute.params.file
@@ -186,8 +215,8 @@ export default {
         const category = this.docs.custom[route.params.category];
         name = category && category.files[route.params.file] ? category.files[route.params.file].name : 'Unknown file';
       } else {
-        const { class: clarse, typedef } = route.params;
-        name = clarse || typedef || 'Search';
+        const { class: command, clarse, table, typedef } = route.params;
+        name = command || clarse || table || typedef || 'Search';
 
         if (name === 'Search') {
           const query = route.query.q;
