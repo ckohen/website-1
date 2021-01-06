@@ -89,7 +89,7 @@ export default {
 
     visibleClasses() {
       const allClasses = this.showPrivate ? this.docs.classes : this.docs.classes.filter(c => c.access !== 'private');
-      return allClasses.filter(c => !visibleTables().includes(c));
+      return allClasses.filter(c => !this.docs.tables.includes(c));
     },
 
     visibleTables() {
