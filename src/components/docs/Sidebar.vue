@@ -88,7 +88,8 @@ export default {
     },
 
     visibleClasses() {
-      return this.showPrivate ? this.docs.classes : this.docs.classes.filter(c => c.access !== 'private');
+      const allClasses = this.showPrivate ? this.docs.classes : this.docs.classes.filter(c => c.access !== 'private');
+      return allClasses.filter(c => !this.visibleTables().includes(c));
     },
 
     visibleTables() {

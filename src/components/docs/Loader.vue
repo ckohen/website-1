@@ -60,11 +60,15 @@ export default {
           docs.classes = docs.classes
             .filter(c => {
               if (/Table$/.test(c.name)) {
-                c.name = c.name.replace(/Table$/, '');
+                if (!c.name.startsWith('Base')) {
+                  c.name = c.name.replace(/Table$/, '');
+                }
                 docs.tables.push(c);
                 return true;
               } else if (/Command$/.test(c.name)) {
-                c.name = c.name.replace(/Command$/, '');
+                if (!c.name.startsWith('Base')) {
+                  c.name = c.name.replace(/Command$/, '');
+                }
                 docs.commands.push(c);
                 return false;
               } else { 
@@ -72,7 +76,7 @@ export default {
               }
             })
             .map(c => {
-              if (/Table$/.test(c.name)) {
+              if (/Table$/.test(c.name) && !c.name.startsWith('Base')) {
                 c.name = c.name.replace(/Table$/, '');
                 return c;
               }
