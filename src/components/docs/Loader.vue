@@ -71,7 +71,7 @@ export default {
                 }
                 docs.commands.push(c);
                 return false;
-              } else { 
+              } else {
                 return true;
               }
             })
