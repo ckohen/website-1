@@ -7,7 +7,6 @@
 
     <div id="toggles">
       <label><input type="checkbox" v-model="toggles['classes']" /> Classes</label>
-      <label><input type="checkbox" v-model="toggles['commands']" /> Commands</label>
       <label><input type="checkbox" class="secondary" v-model="toggles['props']" /> Properties</label>
       <label><input type="checkbox" class="tertiary" v-model="toggles['methods']" /> Methods</label>
       <label><input type="checkbox" class="quaternary" v-model="toggles['events']" /> Events</label>
@@ -55,7 +54,7 @@ export default {
   },
 
   data() {
-    const toggles = { classes: true, commands: true, props: true, methods: true, events: true, typedefs: true };
+    const toggles = { classes: true, props: true, methods: true, events: true, typedefs: true };
     return {
       toggles,
       search: this.$route.query.q,

@@ -53,8 +53,7 @@ export default {
           if (c.events) c.events.sort((a, b) => a.name.localeCompare(b.name));
         }
 
-        // Separate classes from tables and commands
-        docs.commands = [];
+        // Separate classes from tables
         docs.tables = [];
         if (this.source.id === 'corncierge') {
           docs.classes = docs.classes
@@ -65,12 +64,6 @@ export default {
                 }
                 docs.tables.push(c);
                 return true;
-              } else if (/Command$/.test(c.name)) {
-                if (!c.name.startsWith('Base')) {
-                  c.name = c.name.replace(/Command$/, '');
-                }
-                docs.commands.push(c);
-                return false;
               } else {
                 return true;
               }
@@ -115,7 +108,6 @@ export default {
         docs.classes = docs.classes || [];
         docs.typedefs = docs.typedefs || [];
         for (const x of docs.externals) docs.links[x.name] = x.see[0].replace(/\{@link\s+(.+?)\s*\}/i, '$1');
-        for (const c of docs.commands) docs.links[c.name] = { name: 'docs-command', params: { command: c.name } };
         for (const c of docs.classes) docs.links[c.name] = { name: 'docs-class', params: { class: c.name } };
         for (const t of docs.typedefs) docs.links[t.name] = { name: 'docs-typedef', params: { typedef: t.name } };
 
@@ -163,9 +155,7 @@ export default {
         if (SHITS.switching) {
           const route = this.$route;
           SHITS.switching = false;
-          if (route.name === 'docs-command') {
-            if (!docs.commands.some(c => c.name === route.params.command)) this.goHome();
-          } else if (route.name === 'docs-class') {
+          if (route.name === 'docs-class') {
             if (!docs.classes.some(c => c.name === route.params.class)) this.goHome();
           } else if (route.name === 'docs-typedef') {
             if (!docs.typedefs.some(t => t.name === route.params.typedef)) this.goHome();
