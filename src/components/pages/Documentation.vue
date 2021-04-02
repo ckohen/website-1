@@ -8,6 +8,7 @@
 <script>
 import MainSource from '../../data/MainSource';
 import CornciergeSource from '../../data/CornciergeSource';
+import EthanBoatSource from '../../data/EthanBoatSource';
 import CollectionSource from '../../data/CollectionSource';
 import CommandoSource from '../../data/CommandoSource';
 import RPCSource from '../../data/RPCSource';
@@ -25,6 +26,7 @@ export default {
       sources: {
         [MainSource.id]: MainSource,
         [CornciergeSource.id]: CornciergeSource,
+        [EthanBoatSource.id]: EthanBoatSource,
         [CollectionSource.id]: CollectionSource,
         [CommandoSource.id]: CommandoSource,
         [RPCSource.id]: RPCSource,

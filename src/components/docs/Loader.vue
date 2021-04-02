@@ -116,8 +116,8 @@ export default {
           docs.links.Message = { name: 'docs-class', params: { source: 'main', tag: 'master', class: 'Message' } };
         }
 
-        // Workaround for corncierge inter-source see also linking
-        if (this.source.id === 'corncierge') {
+        // Workaround for corncierge / ethanboat inter-source see also linking
+        if (this.source.id === 'corncierge' || this.source.id === 'ethanboat') {
           docs.links.Axios = 'https://github.com/axios/axios#axios-api';
           docs.links.axiosRequest = 'https://github.com/axios/axios#request-config';
           docs.links.axiosResponse = 'https://github.com/axios/axios#response-schema';
