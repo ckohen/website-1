@@ -9,5 +9,5 @@ export default new DocsSource({
   repo: 'ckohen/corncierge',
   defaultTag: 'master',
   branchFilter: branch => !branchBlacklist.has(branch) && !branch.startsWith('dependabot/'),
-  tagFilter: tag => semver.gte(tag, '9.0.0'),
+  tagFilter: tag => semver.gte(tag, '1.2.0'),
 });
